@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booklist-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: booklist
+  template:
+    metadata:
+      labels:
+        app: booklist
+    spec:
+      containers:
+        - name: booklist
+          image: hamimmahdie/booklist2:v2
+          ports:
+            - containerPort: 5002
+          env:
+            - name: DATA_MICROSERVICE
+              valueFrom:
+                 configMapKeyRef:
+                  name: my-config
+                  key: DATA_MICROSERVICE

@@ -1,0 +1,137 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Flask RESTful Example",
+      "description": "Simple Flask RESTful API with Swagger documentation",
+      "version": "1.0"
+    },
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/data/{key}": {
+        "get": {
+          "summary": "Get data by key",
+          "parameters": [
+            {
+              "name": "key",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "404": {
+              "description": "Data not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update data by key",
+          "parameters": [
+            {
+              "name": "key",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Data updated successfully"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete data by key",
+          "parameters": [
+            {
+              "name": "key",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Data deleted successfully"
+            },
+            "404": {
+              "description": "Data not found"
+            }
+          }
+        }
+      },
+      "/data": {
+        "post": {
+          "summary": "Create a new data entry",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Data created successfully"
+            }
+          }
+        }
+      },
+      "/config": {
+        "get": {
+          "summary": "Get list of environment variables",
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/fib": {
+        "get": {
+          "summary": "Get Fibonacci sequence",
+          "parameters": [
+            {
+              "name": "length",
+              "in": "query",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      }
+    }
+  }
+  
