@@ -48,7 +48,7 @@ Starting with Spring Boot and Maven, guided by Amigoscode's tutorials on YouTube
 
 1. **Kubernetes Deployment:**
 
-   Ensure the Docker image is in a registry your Kubernetes can access.
+   Ensure the Docker image is in a registry your Kubernetes can access. Move to /manifests directory and execute the following-
 
    ```sh
    kubectl apply -f deployment.yaml
