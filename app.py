@@ -4,6 +4,10 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse, abort
 from flask_swagger_ui import get_swaggerui_blueprint
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 app = Flask("MyBookList") 
 api = Api(app)
 
@@ -54,8 +58,6 @@ class ConfigResource(Resource):
     
 api.add_resource(ConfigResource, '/config')
 
-logger = logging.getLogger(__name__)
-
 class FibonacciResource(Resource):
     def get(self):
         length = int(request.args.get('length', 0))
@@ -82,4 +84,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0',port=5002)
+    # Configure logging
+    logging.basicConfig(level=logging.INFO)
+    # Start the Flask application
+    app.run(debug=True, host='0.0.0.0', port=5002)
