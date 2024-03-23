@@ -23,7 +23,7 @@ Starting with Spring Boot and Maven, guided by Amigoscode's tutorials on YouTube
 1. **Clone the Repository:**
 
    ```sh
-   git clone https://github.com/HamimMahdie/MyBookList.git
+   git clone https://github.com/HamimMahdie/MyBookList-main.git
    ```
 
 2. **Build the Docker Image:**
