@@ -1,0 +1,42 @@
+name: MyBookList CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Build Docker Image
+      run: docker build -t my-flask-app .
+
+    - name: Run Docker Container
+      run: |
+        docker run -d -p 5002:5002 --name my-flask-app my-flask-app
+        sleep 20  # Increased sleep time to ensure the Flask app is fully up and running
+
+    - name: Verify Microservice API - List Data
+      run: curl -s http://localhost:5002/data
+
+    - name: Verify Microservice API - Post Data
+      run: curl -s -X POST -d "data=Example" -H "Content-Type: application/x-www-form-urlencoded" http://localhost:5002/data
+
+    - name: Verify Microservice API - Get Config
+      run: curl -s http://localhost:5002/config
+
+    - name: Verify Microservice API - Get Fibonacci
+      run: curl -s "http://localhost:5002/fib?length=5"
+
+    - name: Cleanup
+      run: docker stop my-flask-app && docker rm my-flask-app
