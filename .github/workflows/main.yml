@@ -27,16 +27,21 @@ jobs:
         sleep 20  # Increased sleep time to ensure the Flask app is fully up and running
 
     - name: Verify Microservice API - List Data
-      run: curl -s http://localhost:5002/data
+      run: |
+        curl -s http://localhost:5002/data
 
     - name: Verify Microservice API - Post Data
-      run: curl -s -X POST -d "data=Example" -H "Content-Type: application/x-www-form-urlencoded" http://localhost:5002/data
+      run: |
+        curl -s -X POST -d "data=Example" -H "Content-Type: application/x-www-form-urlencoded" http://localhost:5002/data
 
     - name: Verify Microservice API - Get Config
-      run: curl -s http://localhost:5002/config
+      run: |
+        curl -s http://localhost:5002/config
 
     - name: Verify Microservice API - Get Fibonacci
-      run: curl -s "http://localhost:5002/fib?length=5"
+      run: |
+        curl -s "http://localhost:5002/fib?length=5"
 
     - name: Cleanup
-      run: docker stop my-flask-app && docker rm my-flask-app
+      run: |
+        docker stop my-flask-app && docker rm my-flask-app
